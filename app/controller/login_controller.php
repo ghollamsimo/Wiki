@@ -1,10 +1,10 @@
 <?php
 
-class Home extends Controller{
+class login extends Controller{
     public function index(...$param)
     {
 
-            $this->view('home', $param);
+            $this->view('login', $param);
 
     }
 }

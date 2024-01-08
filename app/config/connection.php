@@ -1,7 +1,7 @@
 <?php
 
 class DataBaseConnection{
-    private $host = 'localhost:3308';
+    private $host = 'localhost';
     private $username = 'root';
     private $password = '';
     private $database = 'wiki';

@@ -1,26 +1,25 @@
 <?php
 session_start();
 
-class Home extends Controller{
+class Home extends Controller {
     private $wikiDAO;
     private $userDAO;
 
-    public function __construct(){
+    public function __construct() {
         $this->wikiDAO = new WikiDAO();
         $this->userDAO = new UserDAO();
     }
 
-    public function index(...$param){
+    public function index(...$param) {
         $wikis = $this->wikiDAO->ReadWiki();
-        if (isset($_SESSION['iduser'])){
+        if (isset($_SESSION['iduser'])) {
             $this->userDAO->getUser()->setId($_SESSION['iduser']);
             $user = $this->userDAO->getUserInfo($this->userDAO->getUser());
         }
-        $this->view('home' , ['wiki' => $wikis ]);
+        $this->view('home', ['wiki' => $wikis]);
     }
 
-    public function login()
-    {
+    public function login() {
         if (isset($_POST['login'])) {
             $user = new UserDAO;
             $user->getUser()->setEmail(trim($_POST['email']));
@@ -36,7 +35,7 @@ class Home extends Controller{
                 $_SESSION['role'] = $authenticatedUser['role'];
 
                 if ($_SESSION['role'] === 'Admin') {
-                    header('Location: /wiki/public/dashboard/index');
+                    header('Location: /wiki/public/dashboard');
                     exit;
                 } else {
                     header('Location: /wiki/public/home/index');
@@ -49,9 +48,6 @@ class Home extends Controller{
 
         $this->view('login');
     }
-
-
-
 
     public function Register() {
         if (isset($_POST["submit"])) {
@@ -121,6 +117,4 @@ class Home extends Controller{
         ];
         $this->view('Rigester', $error_user);
     }
-
-
 }

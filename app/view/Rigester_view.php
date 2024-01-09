@@ -53,9 +53,9 @@ require_once (__DIR__ . '/../../include/head.php');
                             <input type="file" class="form-control" name="image" id="inputGroupFile01">
                         </div>
 
-                        <label for="role">Role:</label>
                         <select name="role" id="role">
                             <option value="Auteur">Auteur</option>
+                            <option value="Admin">Admin</option>
                         </select>
 
                         <div class="mb-3">

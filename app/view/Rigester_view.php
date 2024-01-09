@@ -53,7 +53,8 @@ require_once (__DIR__ . '/../../include/head.php');
                             <input type="file" class="form-control" name="image" id="inputGroupFile01">
                         </div>
 
-                        <select class="form-select mb-3" name="role" aria-label="Default select example">
+                        <label for="role">Role:</label>
+                        <select name="role" id="role">
                             <option value="Auteur">Auteur</option>
                         </select>
 

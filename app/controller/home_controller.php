@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 class Home extends Controller{
     private $wikiDAO;
@@ -13,34 +14,36 @@ class Home extends Controller{
         $wikis = $this->wikiDAO->ReadWiki();
         if (isset($_SESSION['iduser'])){
             $this->userDAO->getUser()->setId($_SESSION['iduser']);
-            $this->userDAO->getUserInfo($this->userDAO->getUser());
+            $user = $this->userDAO->getUserInfo($this->userDAO->getUser());
         }
-        $this->view('home' , ['wiki' => $wikis]);
+        $this->view('home' , ['wiki' => $wikis ]);
     }
 
     public function login()
     {
         if (isset($_POST['login'])) {
-            $user = $this->userDAO;
+            $user = new UserDAO;
             $user->getUser()->setEmail(trim($_POST['email']));
             $user->getUser()->setPassword($_POST['password']);
 
-            $user = $user->VerifyUser($user->getUser()); // Fix typo
+            $authenticatedUser = $user->verifyUser($user->getUser());
 
-            if ($user != false) {
-                $_SESSION['iduser'] = $user['iduser'];
-                $_SESSION['Nom'] = $user['Nom'];
-                $_SESSION['Email'] = $user['Email'];
-                $_SESSION['image'] = $user['image'];
-                $_SESSION['role'] = $user['role'];
+            if ($authenticatedUser !== false) {
+                $_SESSION['iduser'] = $authenticatedUser['iduser'];
+                $_SESSION['Nom'] = $authenticatedUser['Nom'];
+                $_SESSION['Email'] = $authenticatedUser['Email'];
+                $_SESSION['image'] = $authenticatedUser['image'];
+                $_SESSION['role'] = $authenticatedUser['role'];
 
-                if ($_SESSION['role'] == 'Admin') {
-                    header('location:/wiki/public/dashboard/index');
-                } elseif ($_SESSION['role'] == 'Auteur') {
-                    header('location:/wiki/public/home/index'); // Corrected line
+                if ($_SESSION['role'] === 'Admin') {
+                    header('Location: /wiki/public/dashboard/index');
+                    exit;
+                } else {
+                    header('Location: /wiki/public/home/index');
+                    exit;
                 }
             } else {
-                echo 'user not found';
+                echo 'User not found or incorrect password';
             }
         }
 
@@ -48,12 +51,12 @@ class Home extends Controller{
     }
 
 
-    public function Rigester()
-    {
+
+
+    public function Register() {
         if (isset($_POST["submit"])) {
             $user = new UserDAO();
 
-            // Validate name
             if (!preg_match('/^[a-zA-Z\s]+$/', $_POST['username'])) {
                 $name_error = 'Invalid name format';
             } else {
@@ -74,18 +77,15 @@ class Home extends Controller{
                 $password_error = '';
             }
 
-            // Validate image (consider reviewing this part)
             $image = isset($_POST['image']) ? 'This Image Already Exists!!' : '';
 
-            // If all validations pass, proceed with user registration
             if ($email_error == '' && $name_error == '' && $password_error == '') {
                 $user->getUser()->setName(trim(isset($_POST['username']) ? trim($_POST['username']) : ''));
                 $user->getUser()->setEmail(trim(isset($_POST['email']) ? trim($_POST['email']) : ''));
                 $user->getUser()->setPassword(isset($_POST['password']) ? trim($_POST['password']) : '');
                 $user->getUser()->setRole(isset($_POST['role']) ? trim($_POST['role']) : '');
 
-
-                if ($user->CreateUser($user->getUser()) == true) {
+                if ($user->CreateUser($user->getUser()) === true) {
                     $rowUser = $user->selectLastUser();
                     $_SESSION['iduser'] = $rowUser['iduser'];
                     $_SESSION['Nom'] = $rowUser['Nom'];
@@ -93,7 +93,8 @@ class Home extends Controller{
                     $_SESSION['image'] = $rowUser['image'];
                     $_SESSION['role'] = $rowUser['role'];
 
-                    header('location:/wiki/public/home/login');
+                    header('location: /wiki/public/home/login');
+                    exit;
                 } else {
                     $error_user = [
                         'email_error' => 'This email exists',
@@ -110,7 +111,7 @@ class Home extends Controller{
                     'password_error' => $password_error,
                     'image' => $image
                 ];
-                $this->view('Rigester', $error_user); // Fix typo
+                $this->view('Rigester', $error_user);
             }
         }
         $error_user = [
@@ -118,7 +119,8 @@ class Home extends Controller{
             'name_error' => '',
             'password_error' => ''
         ];
-        $this->view('Rigester', $error_user); // Fix typo
+        $this->view('Rigester', $error_user);
     }
+
 
 }

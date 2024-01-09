@@ -17,7 +17,7 @@ class UserDAO{
             $email = $user->getEmail();
             $password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
             $image = $user->getImage();
-            $role = $user->getRole();
+            $role = "Auteur";
 
             $query = $this->conn->prepare('INSERT INTO users (iduser, Nom, Email, password, image, role) VALUES (:iduser, :nom, :email, :password, :image, :role)');
             $query->bindParam(':iduser', $id);
@@ -27,10 +27,16 @@ class UserDAO{
             $query->bindParam(':image', $image);
             $query->bindParam(':role', $role);
             $query->execute();
+
+            return true;
         } catch (Exception $e) {
             echo 'M3lem Douz Douz Tgad Had lerror Li 3endek henaya lah ihfdek' . $e->getMessage();
+            return false;
         }
     }
+
+
+
 
 
     public function getUserInfo(User $user)
@@ -83,19 +89,26 @@ class UserDAO{
         $password = $user->getPassword();
 
         $stmt = $this->conn->prepare("SELECT * FROM users WHERE Email = :email");
-
         $stmt->bindParam(':email', $email);
-
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result && password_verify($password, $result['password'])) {
-            return $result;
-        }else{
+        if ($result) {
+            if (password_verify($password, $result['password'])) {
+                return $result; // Password verification successful
+            } else {
+                echo 'Password verification failed. Provided password: ' . $password . ', Hashed password from DB: ' . $result['password'];
+                return false;
+            }
+        } else {
+            echo 'No user found with this email';
             return false;
         }
     }
+
+
+
 
 
     public function getUser()

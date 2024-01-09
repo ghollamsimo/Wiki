@@ -13,21 +13,11 @@
 
 <!-- header -->
 <header>
-    <nav class = "navbar">
-        <div class = "container">
-            <a href = "index.html" class = "navbar-brand">Wiki</a>
-            <div class = "navbar-nav">
-                <a href = "">home</a>
-                <a href = "">design</a>
-                <a href = "">blog</a>
-                <a href = "">about</a>
-            </div>
-        </div>
-    </nav>
+   <?php include_once  '../../wiki/public/../include/navbar.php' ?>
     <div class = "banner">
-        <div class = "container">
+        <div class = "contain">
             <h1 class = "banner-title">
-                <span>Art.</span> Design Blog
+                <span>Wiki</span> Blog
             </h1>
             <p>everything that you want to know about art & design</p>
             <form>
@@ -43,28 +33,32 @@
 
 <!-- blog -->
 <section class = "blog" id = "blog">
-    <div class = "container">
+    <div class = "contain">
         <div class = "title">
             <h2>Latest Blog</h2>
             <p>recent blogs about art & design</p>
         </div>
+
         <div class = "blog-content">
             <!-- item -->
+            <?php
+            $wikis = $data['wiki'];
+            foreach ($wikis as $wiki) :
+                ?>
             <div class = "blog-item">
                 <div class = "blog-img">
-                    <img src = "/wiki/public/../image/blog-p-1.jpg" alt = "">
-
+                    <img src = "/wiki/public/../image/<?php $wiki->getImage() ?>" alt = "">
                 </div>
                 <div class = "blog-text">
-                    <span>20 January, 2020</span>
-                    <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum laudantium nihil! Quaerat.
+                    <span><?php echo $wiki->getDate() ?></span>
+                    <h2><?php echo $wiki->getTitle()?>></h2>
+                    <p><?php echo $wiki->getDescreption()?>
                         <a  href = "#">Read More</a>
                     </p>
 
                 </div>
             </div>
-
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -73,7 +67,7 @@
 
 <!-- design -->
 <section class="design" id="design">
-    <div class="container">
+    <div class="contain">
         <div class="title">
             <h2>Recent Arts & Designs</h2>
             <p>recent arts & designs on the blog</p>
@@ -83,7 +77,7 @@
             <!-- item -->
             <div class="design-item">
                 <div class="design-img">
-                    <img src="images/art-design-1.jpg" alt="">
+                    <img src="/wiki/public/../image/art-design-5.jpg" alt="">
                 </div>
                 <div class="design-title">
                     <a href="#">make an awesome art portfolio for college or university</a>
@@ -167,9 +161,7 @@
 <!-- end of about -->
 
 <!-- footer -->
-<footer>
-
-</footer>
+<?php include_once  '../../wiki/public/../include/footer.php' ?>
 <!-- end of footer -->
 
 

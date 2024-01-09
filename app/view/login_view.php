@@ -27,12 +27,12 @@ require_once (__DIR__ . '/../../include/head.php');
                     <form id="formAuthentication" class="mb-3" method="post" action="">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email or Username</label>
-                            <input type="text" class="form-control" id="email" name="email-username"
+                            <input type="text" class="form-control" id="email" name="email"
                                    placeholder="Enter your email or username" autofocus />
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
-                                <label class="form-label" for="password">Password</label>
+                                <label class="form-label"  for="password">Password</label>
 
                             </div>
                             <div class="input-group input-group-merge">
@@ -49,7 +49,7 @@ require_once (__DIR__ . '/../../include/head.php');
                             </div>
                         </div>
                         <div class="mb-3">
-                            <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                            <button class="btn btn-primary d-grid w-100" name="login" type="submit">Sign in</button>
                         </div>
                     </form>
 

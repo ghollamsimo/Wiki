@@ -7,7 +7,7 @@ class User
     private $email;
     private $password;
     private $image;
-
+    private $role;
     public function __construct()
     {
     }
@@ -68,6 +68,18 @@ class User
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function setRole($role)
+    {
+        $this->id = $role;
 
         return $this;
     }

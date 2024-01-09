@@ -53,17 +53,13 @@ require_once (__DIR__ . '/../../include/head.php');
                             <input type="file" class="form-control" name="image" id="inputGroupFile01">
                         </div>
 
+                        <select class="form-select mb-3" name="role" aria-label="Default select example">
+                            <option value="Auteur">Auteur</option>
+                        </select>
+
                         <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="terms-conditions"
-                                       name="terms" />
-                                <label class="form-check-label" for="terms-conditions">
-                                    I agree to
-                                    <a href="javascript:void(0);">privacy policy & terms</a>
-                                </label>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary d-grid w-100" name="submitInfo">Sign up</button>
+
+                        <button class="btn btn-primary d-grid w-100" name="submit">Sign up</button>
                     </form>
 
                     <p class="text-center">

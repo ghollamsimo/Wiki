@@ -53,9 +53,8 @@ require_once (__DIR__ . '/../../include/head.php');
                             <input type="file" class="form-control" name="image" id="inputGroupFile01">
                         </div>
 
-                        <select name="role" id="role">
-                            <option value="Auteur">Auteur</option>
-                            <option value="Admin">Admin</option>
+                        <select class="form-select mb-3" name="role" aria-label="Default select example">
+                            <option>Autuers</option>
                         </select>
 
                         <div class="mb-3">
@@ -65,7 +64,7 @@ require_once (__DIR__ . '/../../include/head.php');
 
                     <p class="text-center">
                         <span>Already have an account?</span>
-                        <a href="/wiki/public/login">
+                        <a href="/wiki/public/home/login">
                             <span>Sign in instead</span>
                         </a>
                     </p>

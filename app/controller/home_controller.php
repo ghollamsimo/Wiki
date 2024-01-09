@@ -12,6 +12,7 @@ class Home extends Controller {
 
     public function index(...$param) {
         $wikis = $this->wikiDAO->ReadWiki();
+
         if (isset($_SESSION['iduser'])) {
             $this->userDAO->getUser()->setId($_SESSION['iduser']);
             $user = $this->userDAO->getUserInfo($this->userDAO->getUser());
@@ -35,7 +36,7 @@ class Home extends Controller {
                 $_SESSION['role'] = $authenticatedUser['role'];
 
                 if ($_SESSION['role'] === 'Admin') {
-                    header('Location: /wiki/public/dashboard');
+                    header('Location: /wiki/public/dashboard/index');
                     exit;
                 } else {
                     header('Location: /wiki/public/home/index');

@@ -34,9 +34,15 @@
 <!-- blog -->
 <section class = "blog" id = "blog">
     <div class = "contain">
+        <div class="parent-title">
         <div class = "title">
             <h2>Latest Blog</h2>
             <p>recent blogs about art & design</p>
+        </div>
+
+            <div class="btn">
+                <button class="original-button">Add New Wiki</button>
+            </div>
         </div>
 
         <div class = "blog-content">

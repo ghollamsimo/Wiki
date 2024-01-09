@@ -150,15 +150,20 @@ header{
 .design{
     padding: 4.5rem 0;
 }
+.parent-title{
+    display: flex;
+    justify-content: space-between;
+}
 .title{
-    text-align: center;
+    text-align: left;
+
     padding: 1rem 0;
 }
 .title h2{
     font-family: var(--Playfair);
     font-size: 2.4rem;
 }
-.title p{
+.p{
     text-transform: uppercase;
     padding: 0.6rem 0;
 }

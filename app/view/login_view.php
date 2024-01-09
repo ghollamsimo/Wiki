@@ -55,7 +55,7 @@ require_once (__DIR__ . '/../../include/head.php');
 
                     <p class="text-center">
                         <span>New on our platform?</span>
-                        <a href="/wiki/public/Register">
+                        <a href="/wiki/public/home/Register">
                             <span>Create an account</span>
                         </a>
                     </p>

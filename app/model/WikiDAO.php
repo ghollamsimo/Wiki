@@ -67,6 +67,30 @@ class WikiDAO
     }
 
 
+    public function Archiver(Wiki $wiki)
+    {
+        try {
+            $wikiid = $wiki->getId();
+
+            $req = $this->conn->prepare("UPDATE wiki SET etat = 'Archiver' WHERE idwiki = :id");
+            $req->bindParam(':id' , $wikiid);
+            $req->execute();
+        } catch (Exception $e) {
+            error_log("Error in update: " . $e->getMessage());
+        }
+    }
+    public function NonArchiver(Wiki $wiki)
+    {
+        try {
+            $wikiid = $wiki->getId();
+
+            $req = $this->conn->prepare("UPDATE wiki SET etat = 'Publier' WHERE idwiki = :id");
+            $req->bindParam(':id' , $wikiid);
+            $req->execute();
+        } catch (Exception $e) {
+            error_log("Error in update: " . $e->getMessage());
+        }
+    }
 
 
 }

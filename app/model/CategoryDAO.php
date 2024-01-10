@@ -43,20 +43,28 @@ class CategoryDAO
         $stmt->execute();
     }
 
-    public function EditCategory(Category $category){
+    public function EditCategory(Category $category) {
         try {
             $name = $category->getNameCategory();
             $id = $category->getId();
 
             $query = $this->conn->prepare('UPDATE category SET namecategory = :catname WHERE idcategory = :idcategory');
             $query->bindParam(':catname', $name);
-            $query->bindParam(':idcategory', $id);
-            echo 'Category ID: ' . $id;
+            $query->bindParam(':idcategory', $id, PDO::PARAM_INT); // Use PDO::PARAM_INT for integer types
             $query->execute();
+
+            $rowCount = $query->rowCount();
+            if ($rowCount > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception $e) {
-            echo 'Yabent nass Ana Fa9ir wedrahmi me3doda' . $e->getMessage();
+            echo 'An error occurred: ' . $e->getMessage();
+            return false;
         }
     }
+
 
     public function DeleteCategory(Category $category){
         try {

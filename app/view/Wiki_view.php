@@ -146,16 +146,25 @@
                         </tr>
                         </thead>
                         <tbody class="bg-white">
+<?php
+$wikis = $data['wiki'];
+foreach ($wikis as $wiki) :
+?>
+    <tr>
+        <td class="py-4 px-6 border-b border-gray-200"><?php echo $wiki->getDate(); ?></td>
+        <td class="py-4 px-6 border-b border-gray-200 truncate"><?php echo $wiki->getTitle() ?></td>
+        <td class="py-4 px-6 border-b border-gray-200"><?php echo $wiki->getDescreption() ?></td>
+        <td class="py-4 px-6 border-b border-gray-200">
+            <!-- Separate form for each row -->
+            <form method="post">
+                <button type="submit" class="pointer bg-red-500 text-white py-1 px-2 rounded-full text-xs" name="archive" value="<?= $wiki->getId() ?>">Archive</button>
+            </form>
 
-                            <tr>
-                                <td class="py-4 px-6 border-b border-gray-200"><?php echo 'salam'; ?></td>
-                                <td class="py-4 px-6 border-b border-gray-200 truncate"><?php echo 'salam'; ?></td>
-                                <td class="py-4 px-6 border-b border-gray-200"><?php echo 'salam' ?></td>
-                                <td class="py-4 px-6 border-b border-gray-200">
-                                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Archive</span>
-                                    <span class="bg-red-500 text-white py-1 px-2 rounded-full text-xs">Delete</span>
-                                </td>
-                            </tr>
+            <form method="post">
+                <button type="submit" class="pointer bg-red-500 text-white py-1 px-2 rounded-full text-xs" name="unarchive" value="<?= $wiki->getId() ?>">Unarchive</button>
+            </form>
+        </td>
+    </tr>                        <?php endforeach;?>
                         </tbody>
 
                     </table>

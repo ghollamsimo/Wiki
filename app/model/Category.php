@@ -25,7 +25,7 @@ class Category
         return $this->idcategory;
     }
 
-    public function setId($valeu){
-        return $this->idcategory = $valeu;
+    public function setId($idcategory){
+        return $this->idcategory = $idcategory;
     }
 }

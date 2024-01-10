@@ -64,6 +64,13 @@ class Home extends Controller {
         $this->view('login');
     }
 
+    public function logout()
+    {
+        session_start();
+        session_unset();
+        session_destroy();
+        header('location:/wiki/public/home/login');
+    }
     public function Register() {
         if (isset($_POST["submit"])) {
             $user = new UserDAO();

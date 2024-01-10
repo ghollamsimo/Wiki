@@ -148,17 +148,16 @@
             <?php $categories = $data['category'];
                     foreach ($categories as $category) : ?>
                         <tr>
-                            <td class="py-4 px-6 border-b border-gray-200"><?= $category->getNameCategory() . ' ' . ($category->getId() ?? ''); ?></td>
+                            <td class="py-4 px-6 border-b border-gray-200"><?= $category->getNameCategory() . ' ' . ($category->getId() ?? ''); ?>
+                            </td>
                             <td class="py-4 px-6 border-b border-gray-200 flex justify-end">
-                                <input type="hidden" name="idcat" value="<?= $category->getId(); ?>">
-                                <button data-modal-target="edit-modal<?= $category->getId(); ?>" data-modal-toggle="edit-modal<?= $category->getId();
-                                ;?>" class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Edit</button>
-                                <button class="bg-red-500 text-white py-1 px-2 rounded-full text-xs">Delete</button>
+                                <button value="<?= $category->getId() ?>" data-modal-target="edit-modal" data-modal-toggle="edit-modal" class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Edit</button>
+                                <button class="updateHidden  bg-red-500 text-white py-1 px-2 rounded-full text-xs">Delete</button>
                             </td>
                         </tr>
 
 
-                        <div id="edit-modal<?= $category->getId() ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div id="edit-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                             <div class="relative p-4 w-full max-w-md max-h-full">
                                 <!-- Modal content -->
                                 <div class="relative bg-white rounded-lg shadow ">
@@ -174,15 +173,14 @@
                                             <span class="sr-only">Close modal</span>
                                         </button>
                                     </div>
-                                    <!-- Modal body -->
                                     <div class="p-4 md:p-5">
                                         <form class="space-y-4" action="" method="post" enctype="multipart/form-data">
                                             <div>
                                                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
                                                 <input type="text" name="editname" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Name" required>
                                             </div>
-                                            <input type="hidden" name="idcat" value="<?= $category->getId(); ?>">
-                                            <button type="submit" name="edit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save Changes</button>
+                                            <input type="hidden" name="editCategoryId" id="editCategoryId" value="">
+                                            <button type="submit" value="<?= $category->getId()  ?>" name="edit" class="EModal w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save Changes</button>
                                         </form>
                                     </div>
                                 </div>
@@ -190,7 +188,7 @@
                         </div>
 
 
-                        <div id="edit-modal-<?= $category->getId() ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div id="edit-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                             <div class="relative p-4 w-full max-w-md max-h-full">
                                 <!-- Modal content -->
                                 <div class="relative bg-white rounded-lg shadow ">
@@ -213,7 +211,6 @@
                                                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
                                                 <input type="text" name="editname" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Name" required>
                                             </div>
-                                            <input type="hidden" name="idcat" value="<?= $category->getId(); ?>">
                                             <button type="submit" name="edit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save Changes</button>
                                         </form>
                                     </div>
@@ -263,3 +260,19 @@
         </div>
     </div>
 </div>
+
+<script>
+    const updateBtns = document.querySelectorAll(".updateHidden");
+    const editModal = document.getElementById("edit-modal");
+    const editCategoryIdInput = document.getElementById("editCategoryId");
+
+    updateBtns.forEach(element => {
+        element.addEventListener("click", function() {
+            // Set the category ID in the hidden input field
+            editCategoryIdInput.value = this.value;
+
+            // Show the edit modal
+            editModal.classList.remove("hidden");
+        });
+    });
+</script>

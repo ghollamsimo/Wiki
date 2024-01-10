@@ -8,6 +8,7 @@ class Home extends Controller {
     public function __construct() {
         $this->wikiDAO = new WikiDAO();
         $this->userDAO = new UserDAO();
+        $this->category = new CategoryDAO();
     }
 
     public function index(...$param) {
@@ -17,7 +18,20 @@ class Home extends Controller {
             $this->userDAO->getUser()->setId($_SESSION['iduser']);
             $user = $this->userDAO->getUserInfo($this->userDAO->getUser());
         }
-        $this->view('home', ['wiki' => $wikis]);
+
+        if (isset($_POST['submit'])){
+            $wiki = new Wiki();
+            $wiki->setTitle($_POST['title']);
+            $wiki->setImage($_POST['img']);
+            $wiki->setTag($_POST['tag']);
+            $wiki->setCategory($_POST['cat']);
+            $wiki->setDescreption($_POST['desc']);
+
+            $this->wikiDAO->CreateWiki($wiki);
+        }
+
+        $categorys = $this->category->ReadCategory();
+        $this->view('home', ['wiki' => $wikis ,'category' => $categorys]);
     }
 
     public function login() {

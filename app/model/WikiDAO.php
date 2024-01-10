@@ -20,47 +20,53 @@ class WikiDAO
             $descreption = $wiki->getDescreption();
             $image = $wiki->getImage();
             $date = $wiki->getDate();
+            $tag = $wiki->getTag();
             $etat = $wiki->getEtat();
+            $category = $wiki->getCategory();
 
-            $query = $this->conn->prepare("INSERT INTO wiki (title, Descreption , image, ladate, etat , idcategory , iduser) 
-             VALUES (:title , :desc , :img , :date , :etat , :category , :iduser)");
-            $query->bindParam(':title' , $title);
-            $query->bindParam(':desc' , $descreption);
-            $query->bindParam(':img' , $image);
-            $query->bindParam(':date' , $date);
-            $query->bindParam(':etat' , $etat);
+            $query = $this->conn->prepare("INSERT INTO wiki (title, Descreption, image) 
+         VALUES (:title, :desc, :img)");
+            $query->bindParam(':title', $title);
+            $query->bindParam(':desc', $descreption);
+            $query->bindParam(':img', $image);
 
             $query->execute();
-        }catch (Exception $e){
-            echo 'Alllla Matheme9nich' . $e->getMessage() ;
+        } catch (Exception $e) {
+            echo 'Alllla Matheme9nich' . $e->getMessage();
         }
     }
 
-    public function ReadWiki(){
+
+    public function ReadWiki()
+    {
         try {
-            $query = $this->conn->prepare( 'SELECT * FROM wiki');
+            $query = $this->conn->prepare('SELECT * FROM wiki');
             $query->execute();
-            $stmt =  $query->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $query->fetchAll(PDO::FETCH_ASSOC);
 
             $wikis = [];
 
-             foreach ($stmt as $data){
+            foreach ($stmt as $data) {
                 $wiki = new Wiki();
-                 $wiki->setId($data['idwiki']);
-                 $wiki->setTitle($data['Title']);
-                 $wiki->setDescreption($data['Descreption']);
-                 $wiki->setImage($data['image']);
-                 $wiki->setDate($data['ladate']);
-                 $wiki->setEtat($data['etat']);
+                $wiki->setId($data['idwiki']);
+                $wiki->setTitle($data['Title']);
+                $wiki->setDescreption($data['Descreption']);
+                $wiki->setImage($data['image']);
+                $wiki->setDate($data['ladate']);
+                $wiki->setEtat($data['etat']);
 
-                 $wikis [] = $wiki;
+                $wikis [] = $wiki;
 
-             }
+            }
 
-             return $wikis;
-        }catch (Exception $e){
-            echo 'Wa safi wa siiiiir'. $e->getMessage();
+            return $wikis;
+        } catch (Exception $e) {
+            echo 'Wa safi wa siiiiir' . $e->getMessage();
             return [];
         }
     }
+
+
+
+
 }

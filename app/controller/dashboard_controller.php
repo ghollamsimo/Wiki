@@ -3,10 +3,12 @@
 class Dashboard extends Controller
 {
     private $AdminDAO;
+    private $CategoryDAO;
 
     public function __construct()
     {
         $this->AdminDAO = new AdminDAO();
+        $this->CategoryDAO = new CategoryDAO();
     }
 
     public function index()
@@ -33,8 +35,21 @@ class Dashboard extends Controller
     }
 
     public function Category(){
-        $admin = new Admin();
-        $category = $this->AdminDAO->CreateCategory($admin);
-        $this->view('Categorys' , ['CreateCategory' => $category]);
+
+        $categorys =  $this->CategoryDAO->ReadCategory();
+        $cat = new Category();
+        if (isset($_POST['submit'])){
+            $cat->setId($_POST['idcat']);
+            $cat->setCategory($_POST['namecategory']);
+            $this->CategoryDAO->CreateCategory($cat);
+        }
+
+        if(isset($_POST['edit'])){
+            $cat->setId($_POST['idcat']);
+            $cat->setCategory($_POST['editname']);
+            $this->CategoryDAO->EditCategory($cat);
+        }
+
+        $this->view('Categorys' ,['category' => $categorys] );
     }
 }

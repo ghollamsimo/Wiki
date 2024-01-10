@@ -8,6 +8,8 @@ class Wiki
     private $image;
     private $date;
     private $etat;
+    private $tag;
+    private $category;
 
     public function __construct(){
 
@@ -50,5 +52,18 @@ class Wiki
     }
     public function setEtat($value){
         return $this->etat = $value;
+    }
+    public function getTag(){
+        return $this->tag;
+    }
+
+    public function setTag($value){
+        return $this->tag = $value;
+    }
+    public function getCategory(){
+        return $this->category;
+    }
+    public function setCategory($value){
+        return $this->category = $value;
     }
 }

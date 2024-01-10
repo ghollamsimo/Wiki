@@ -85,20 +85,7 @@ class AdminDAO
         }
     }
 
-    public function CreateCategory(Admin $category){
-        try {
-            $name = $category->getName();
-            $query = $this->conn->prepare('INSERT INTO category(namecategory) VALUES (:namecategory)');
-            $stmt = $query;
-            $stmt->bindParam(':namecategory' ,  $name);
-            $stmt->execute();
 
-            return true;
-        }catch(Exception $e){
-            echo 'Lkhobz dero Jou3' . $e->getMessage();
-            return false;
-        }
-    }
 
     public function getAdmin()
     {

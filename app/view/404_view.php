@@ -1,33 +1,15 @@
-<!doctype html>
-<html lang="en">
-<?php
-require_once (__DIR__ . '/../../include/head.php');;
-?>
-<link rel="stylesheet" href="/wiki/public/style/404.css">
-<title>404 | Page Not Found</title>
-<body class="bg-purple">
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
-<div class="stars">
-    <div class="custom-navbar">
-        <div class="brand-logo">
-            <img src="http://salehriaz.com/404Page/img/logo.svg" width="80px">
-        </div>
-    </div>
-    <div class="central-body">
-        <img class="image-404" src="http://salehriaz.com/404Page/img/404.svg" width="300px">
-        <a href="/wiki/public/home" class="btn-go-home">GO BACK HOME</a>
-    </div>
-    <div class="objects">
-        <img class="object_rocket" src="http://salehriaz.com/404Page/img/rocket.svg" width="40px">
-        <div class="earth-moon">
-            <img class="object_earth" src="http://salehriaz.com/404Page/img/earth.svg" width="100px">
-            <img class="object_moon" src="http://salehriaz.com/404Page/img/moon.svg" width="80px">
-        </div>
-        <div class="box_astronaut">
-            <img class="object_astronaut" src="http://salehriaz.com/404Page/img/astronaut.svg" width="140px">
-        </div>
-    </div>
 
-</div>
-</body>
-</html>
+<section class="flex items-center h-full p-16 dark:bg-gray-900 dark:text-gray-100">
+    <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+        <div class="max-w-md text-center">
+            <h2 class="mb-8 font-extrabold text-9xl dark:text-gray-600">
+                <span class="sr-only">Error</span>404
+            </h2>
+            <p class="text-2xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
+            <p class="mt-4 mb-8 dark:text-gray-400">But dont worry, you can find plenty of other things on our homepage.</p>
+            <a rel="noopener noreferrer" href="/wiki/public/home" class="px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">Back to homepage</a>
+        </div>
+    </div>
+</section>

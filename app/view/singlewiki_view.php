@@ -8,14 +8,15 @@
 
     <main class="mt-10">
 <?php  $wikis = $data['wiki'];
-foreach ($wikis as $wiki) :
+//die();
+//foreach ($wikis as $wiki) :
 
 ?>
         <div class="mb-4 md:mb-0 w-full mx-auto relative">
-            <input type="text" value="<?= $wiki->getId() ?>">
+            <input type="text" value="<?= "" ?>">
             <div class="px-4 lg:px-0">
                 <h2 class="text-4xl font-semibold text-gray-800 leading-tight">
-                    <?php echo $wiki->getTitle()?>
+                    <?= $wikis->getTitle()?>
                 </h2>
                 <a
                         href="#"
@@ -107,7 +108,7 @@ foreach ($wikis as $wiki) :
             </div>
 
         </div>
-        <?php endforeach;?>
+        <?php //endforeach;?>
     </main>
 </div>
 

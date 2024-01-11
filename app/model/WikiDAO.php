@@ -70,6 +70,18 @@ class WikiDAO
         }
     }
 
+    public function ReadOneWiki(Wiki $wiki){
+        try {
+            $id = $wiki->getId();
+            $query = $this->conn->prepare('SELECT * FROM wiki WHERE idwiki = :idwiki');
+            $query->bindParam(':idwiki' , $id);
+            $query->execute();
+            return $query->fetch();
+        }catch (Exception $e){
+            echo 'Waaa Reb l3ali' . $e->getMessage();
+        }
+    }
+
 
     public function Archiver(Wiki $wiki)
     {

@@ -58,7 +58,6 @@
 
     <div class = "contain">
         <div class = "blog-content">
-            <!-- item -->
             <?php
             $wikis = $data['wiki'];
             foreach ($wikis as $wiki) :
@@ -80,10 +79,8 @@
         </div>
     </div>
 </section>
-<!-- end of blog -->
 
 
-<!-- design -->
 <section class="design" id="design">
     <div class="contain">
         <div class="title">

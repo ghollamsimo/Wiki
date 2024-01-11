@@ -28,16 +28,22 @@ class Home extends Controller {
             $wiki->setDescreption($_POST['desc']);
             $wiki->getUserId()->setUserId($_POST['userid']);
             $this->wikiDAO->CreateWiki($wiki);
+            $wiki->setId($_GET['idwiki']);
         }
 
         $categorys = $this->category->ReadCategory();
         $this->view('home', ['wiki' => $wikis ,'category' => $categorys]);
     }
 
-    public function Singlewiki(){
-        $wikis = $this->wikiDAO->ReadWiki();
-
-        $this->view('singlewiki' ,['wiki' => $wikis] );
+    public function Singlewiki($id): void{
+        if ($id){
+            $idWiki = $id;
+            $wiki = new Wiki();
+            $wiki->setId($idWiki);
+            $wikis = $this->wikiDAO->ReadOneWiki($wiki);
+            $wiki->setTitle($wikis["Title"]);
+            $this->view('singlewiki' ,['wiki' => $wiki] );
+        }
 
     }
     public function login() {

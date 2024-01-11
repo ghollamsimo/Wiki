@@ -203,8 +203,7 @@
                         <tr class="bg-gray-100">
                             <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Name</th>
                             <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Email</th>
-                            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Phone</th>
-                            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Action</th>
+                            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Role</th>
                         </tr>
                         </thead>
                         <tbody class="bg-white">
@@ -216,12 +215,34 @@
                                 <td class="py-4 px-6 border-b border-gray-200"><?php echo $user->getName(); ?></td>
                                 <td class="py-4 px-6 border-b border-gray-200 truncate"><?php echo $user->getEmail(); ?></td>
                                 <td class="py-4 px-6 border-b border-gray-200"><?php echo $user->getRole(); ?></td>
-                                <td class="py-4 px-6 border-b border-gray-200">
-                                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Edit</span>
-                                    <span class="bg-red-500 text-white py-1 px-2 rounded-full text-xs">Delete</span>
-                                </td>
                             </tr>
                         <?php endforeach; ?>
+                        </tbody>
+
+                    </table>
+
+
+                    <table class="w-full table-fixed">
+                        <thead>
+                        <tr class="bg-gray-100">
+                            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Date</th>
+                            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Titel</th>
+                            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Desception</th>
+                            <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Etat</th>
+                        </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                        <?php
+                        $wikis = $data['wiki'];
+                        foreach ($wikis as $wiki) :
+                            ?>
+                            <tr>
+                                <td class="py-4 px-6 border-b border-gray-200"><?php echo $wiki->getDate(); ?></td>
+                                <td class="py-4 px-6 border-b border-gray-200 truncate"><?php echo $wiki->getTitle() ?></td>
+                                <td class="py-4 px-6 border-b border-gray-200"><?php echo substr( $wiki->getDescreption() , 0 , 30) ?></td>
+                                <td class="py-4 px-6 border-b border-gray-200"><?php echo $wiki->getEtat() ?></td>
+                            </tr>
+                        <?php endforeach;?>
                         </tbody>
 
                     </table>

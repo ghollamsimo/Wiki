@@ -148,8 +148,8 @@ foreach ($wikis as $wiki) :
 ?>
     <tr>
         <td class="py-4 px-6 border-b border-gray-200"><?php echo $wiki->getDate(); ?></td>
-        <td class="py-4 px-6 border-b border-gray-200 truncate"><?php echo $wiki->getTitle() ?></td>
-        <td class="py-4 px-6 border-b border-gray-200"><?php echo $wiki->getDescreption() ?></td>
+        <td class="py-4 px-6 border-b border-gray-200"><?php echo $wiki->getTitle() ?></td>
+        <td class="py-4 px-6 border-b border-gray-200 truncate"><?php echo $wiki->getDescreption() ?></td>
         <td class="py-4 px-6 border-b border-gray-200">
             <!-- Separate form for each row -->
             <form method="post">

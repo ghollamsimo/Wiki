@@ -24,11 +24,13 @@ class Dashboard extends Controller
 
         $GetUsers = $this->AdminDAO->GetUsers();
 
+        $wiki = $this->WikiDAO->ReadWiki();
         $this->view('dashboard', [
             'userAnalysis' => $userAnalysis,
             'wikiCount' => $wikiCount,
             'categoryCount' => $categoryCount,
-            'GetUsers' => $GetUsers
+            'GetUsers' => $GetUsers ,
+            'wiki' => $wiki
         ]);
     }
 

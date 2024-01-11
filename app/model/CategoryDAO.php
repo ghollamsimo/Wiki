@@ -21,6 +21,7 @@ class CategoryDAO
 
             while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
                 $categoryInstance = new Category();
+                $categoryInstance->setId($data["idcategory"]);
                 $categoryInstance->setCategory($data['namecategory']);
 
                 $categories[] = $categoryInstance;

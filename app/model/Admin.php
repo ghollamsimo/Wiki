@@ -45,7 +45,7 @@ class Admin extends User
 
     public function setRole($role)
     {
-        $this->id = $role;
+        $this->role = $role;
 
         return $this;
     }

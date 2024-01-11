@@ -26,7 +26,7 @@ class Home extends Controller {
             $wiki->setTag($_POST['tag']);
             $wiki->setCategory($_POST['cat']);
             $wiki->setDescreption($_POST['desc']);
-
+            $wiki->getUserId()->setUserId($_POST['userid']);
             $this->wikiDAO->CreateWiki($wiki);
         }
 

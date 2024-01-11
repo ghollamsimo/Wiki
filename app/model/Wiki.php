@@ -10,6 +10,7 @@ class Wiki
     private $etat;
     private $tag;
     private $category;
+    private $userid;
 
     public function __construct(){
 
@@ -65,5 +66,12 @@ class Wiki
     }
     public function setCategory($value){
         return $this->category = $value;
+    }
+    public function getUserId()
+    {
+        return $this->userid;
+    }
+    public function setUserId($value){
+        return $this->userid = $value;
     }
 }

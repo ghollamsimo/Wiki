@@ -22,14 +22,17 @@ class WikiDAO
             $date = $wiki->getDate();
             $tag = $wiki->getTag();
             $etat = $wiki->getEtat();
+            $user = $wiki->getUserId();
             $category = $wiki->getCategory();
 
-            $query = $this->conn->prepare("INSERT INTO wiki (title, Descreption, etat, image) 
-         VALUES (:title, :desc, null,  :img)");
+            $query = $this->conn->prepare("INSERT INTO wiki (title, Descreption, etat, image, iduser) 
+     VALUES (:title, :desc, :etat, :img, :iduser)");
+
             $query->bindParam(':title', $title);
             $query->bindParam(':desc', $descreption);
+            $query->bindParam(':etat', $etat);
             $query->bindParam(':img', $image);
-            $query->bindParam('null', $etat);
+            $query->bindParam(':iduser', $user);
 
             $query->execute();
         } catch (Exception $e) {

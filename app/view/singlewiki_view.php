@@ -103,14 +103,6 @@ foreach ($wikis as $wiki) :
                             <p class="font-semibold text-gray-600 text-xs"> Editor </p>
                         </div>
                     </div>
-                    <p class="text-gray-700 py-3">
-                        Mike writes about technology
-                        Yourself required no at thoughts delicate landlord it be. Branched dashwood do is whatever it.
-                    </p>
-                    <button class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
-                        Follow
-                        <i class='bx bx-user-plus ml-2' ></i>
-                    </button>
                 </div>
             </div>
 

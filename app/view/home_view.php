@@ -37,31 +37,39 @@
 
 <!-- blog -->
 <section class = "blog" id = "blog">
-    <div class = "contain">
-        <div class="parent-title">
+    <div class="parent-title ml-20">
         <div class = "title">
             <h2>Latest Wikis</h2>
             <p>recent Wiki</p>
         </div>
+        <?php if(isset($_SESSION['iduser'])):
+            if ($_SESSION['role'] === 'Auteur'):
+                ?>
+                <input type="hidden" name="userid">
+                <div class="btn">
+                    <button class="original-button" data-modal-target="crud-modal" data-modal-toggle="crud-modal">Add New Wiki</button>
+                </div>
 
-            <div class="btn">
-                <button class="original-button" data-modal-target="crud-modal" data-modal-toggle="crud-modal">Add New Wiki</button>
-            </div>
-        </div>
+            <?php endif; ?>
+        <?php else: ?>
+            <div></div>
+        <?php endif;?>
+    </div>
 
+    <div class = "contain">
         <div class = "blog-content">
             <!-- item -->
             <?php
             $wikis = $data['wiki'];
             foreach ($wikis as $wiki) :
                 ?>
-            <div class = "blog-item">
+                <div class = "blog-item">
                 <div class = "blog-img">
                     <img src="/wiki/public/../image/<?php echo $wiki->getImage(); ?>" alt="">
                 </div>
                 <div class = "blog-text">
                     <span><?php echo $wiki->getDate() ?></span>
-                    <h2><?php echo $wiki->getTitle()?>></h2>
+                    <h2><?php echo $wiki->getTitle()?></h2>
                     <p><?php echo $wiki->getDescreption()?>
                         <a  href = "/wiki/public/home/Singlewiki/<?= $wiki->getId() ?>">Read More</a>
                     </p>

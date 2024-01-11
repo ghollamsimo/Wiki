@@ -5,11 +5,13 @@ class Dashboard extends Controller
     private $AdminDAO;
     private $CategoryDAO;
     private $WikiDAO;
+    private $TagDAO;
     public function __construct()
     {
         $this->AdminDAO = new AdminDAO();
         $this->CategoryDAO = new CategoryDAO();
         $this->WikiDAO = new WikiDAO();
+        $this->TagDAO = new TagDAO();
     }
 
     public function index()
@@ -68,8 +70,6 @@ class Dashboard extends Controller
             $this->CategoryDAO->CreateCategory($cat);
         }
 
-
-
         if(isset($_POST['edit'])){
             $categoryId = $_POST['editCategoryId'];
             $newName = $_POST['editname'];
@@ -80,5 +80,33 @@ class Dashboard extends Controller
         }
 
         $this->view('Categorys' ,['category' => $categorys] );
+    }
+
+    public function Tags(){
+        $tags = $this->TagDAO->ReadTag();
+        $tag = new Tag();
+        if (isset($_POST['submit'])){
+            $nametag = $_POST['nametag'];
+
+            $tag->setNameTag($nametag);
+            $this->TagDAO->CreateTag($tag);
+        }
+
+        if (isset($_POST['delete'])){
+            $idtag = $_POST['idtag'];
+
+            $tag->setIdTag($idtag);
+            $this->TagDAO->DeleteTag($tag);
+        }
+
+        if(isset($_POST['edit'])){
+            $idtag = $_POST['idtag'];
+            $nametag = $_POST['editname'];
+
+            $tag->setIdTag($idtag);
+            $tag->setNameTag($nametag);
+            $this->TagDAO->EditTag($tag);
+        }
+        $this->view('tag' , ['tag' => $tags]);
     }
 }

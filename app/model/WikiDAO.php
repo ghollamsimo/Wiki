@@ -24,11 +24,12 @@ class WikiDAO
             $etat = $wiki->getEtat();
             $category = $wiki->getCategory();
 
-            $query = $this->conn->prepare("INSERT INTO wiki (title, Descreption, image) 
-         VALUES (:title, :desc, :img)");
+            $query = $this->conn->prepare("INSERT INTO wiki (title, Descreption, etat, image) 
+         VALUES (:title, :desc, null,  :img)");
             $query->bindParam(':title', $title);
             $query->bindParam(':desc', $descreption);
             $query->bindParam(':img', $image);
+            $query->bindParam('null', $etat);
 
             $query->execute();
         } catch (Exception $e) {

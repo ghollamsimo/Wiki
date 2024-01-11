@@ -34,6 +34,12 @@ class Home extends Controller {
         $this->view('home', ['wiki' => $wikis ,'category' => $categorys]);
     }
 
+    public function Singlewiki(){
+        $wikis = $this->wikiDAO->ReadWiki();
+
+        $this->view('singlewiki' ,['wiki' => $wikis] );
+
+    }
     public function login() {
         if (isset($_POST['login'])) {
             $user = new UserDAO;

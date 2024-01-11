@@ -19,7 +19,7 @@
             </div>
 
             <nav class="mt-10">
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25" href="#">
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25" href="/wiki/public/dashboard/index">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -32,7 +32,7 @@
                 </a>
 
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                   href="#">
+                   href="/wiki/public/dashboard/Category">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -40,11 +40,11 @@
                         </path>
                     </svg>
 
-                    <span class="mx-3">UI Elements</span>
+                    <span class="mx-3">Category</span>
                 </a>
 
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                   href="#">
+                   href="/wiki/public/dashboard/Wikis">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -52,11 +52,11 @@
                         </path>
                     </svg>
 
-                    <span class="mx-3">Tables</span>
+                    <span class="mx-3">Wikis</span>
                 </a>
 
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                   href="#">
+                   href="/wiki/public/dashboard/tags">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -64,7 +64,7 @@
                         </path>
                     </svg>
 
-                    <span class="mx-3">Forms</span>
+                    <span class="mx-3">Tags</span>
                 </a>
             </nav>
         </div>
@@ -113,11 +113,7 @@
                         <div x-show="dropdownOpen"
                              class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl"
                              style="display: none;">
-                            <a href="#"
-                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Profile</a>
-                            <a href="#"
-                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Products</a>
-                            <a href="#"
+                            <a href="/wiki/public/home/logout"
                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Logout</a>
                         </div>
                     </div>

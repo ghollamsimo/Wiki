@@ -70,6 +70,13 @@ class Dashboard extends Controller
             $this->CategoryDAO->CreateCategory($cat);
         }
 
+        if (isset($_POST['delete'])){
+            $idcategory = $_POST['idcat'];
+
+            $cat->setId($idcategory);
+            $this->CategoryDAO->DeleteCategory($cat);
+        }
+
         if(isset($_POST['edit'])){
             $categoryId = $_POST['editCategoryId'];
             $newName = $_POST['editname'];

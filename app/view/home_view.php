@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link rel="stylesheet" href="/wiki/public/style/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+
 </head>
 <body>
 
@@ -21,7 +23,7 @@
             <h1 class = "banner-title">
                 <span>Wiki</span> Blog
             </h1>
-            <p>everything that you want to know about art & design</p>
+            <p>everything that you want to know about Evrething</p>
             <form>
                 <input type = "text" class = "search-input" placeholder="find your food . . .">
                 <button type = "submit" class = "search-btn">
@@ -38,8 +40,8 @@
     <div class = "contain">
         <div class="parent-title">
         <div class = "title">
-            <h2>Latest Blog</h2>
-            <p>recent blogs about art & design</p>
+            <h2>Latest Wikis</h2>
+            <p>recent Wiki</p>
         </div>
 
             <div class="btn">
@@ -55,13 +57,13 @@
                 ?>
             <div class = "blog-item">
                 <div class = "blog-img">
-                    <img src = "/wiki/public/../image/<?php $wiki->getImage() ?>" alt = "">
+                    <img src="/wiki/public/../image/<?php echo $wiki->getImage(); ?>" alt="">
                 </div>
                 <div class = "blog-text">
                     <span><?php echo $wiki->getDate() ?></span>
                     <h2><?php echo $wiki->getTitle()?>></h2>
                     <p><?php echo $wiki->getDescreption()?>
-                        <a  href = "#">Read More</a>
+                        <a  href = "/wiki/public/home/Singlewiki/<?= $wiki->getId() ?>">Read More</a>
                     </p>
 
                 </div>
@@ -153,7 +155,7 @@
     <div class = "container">
         <div class = "about-content">
             <div>
-                <img src = "images/about-bg.jpg" alt = "">
+                <img src = "/wiki/public/../image/about-bg.jpg" alt = "">
             </div>
             <div class = "about-text">
                 <div class = "title">
@@ -258,7 +260,6 @@
 <?php include_once  '../../wiki/public/../include/footer.php' ?>
 <!-- end of footer -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
 </body>
 </html>

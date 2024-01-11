@@ -68,6 +68,11 @@ class CategoryDAO
 
     public function DeleteCategory(Category $category){
         try {
+            $id = $category->getId();
+            $query = $this->conn->prepare('DELETE FROM category WHERE idcategory = :idcategory');
+            $stmt = $query;
+            $stmt->bindParam(':idcategory' , $id);
+            $stmt->execute();
         }catch (Exception $e){
             echo 'waaaaaaaaa Barca' . $e->getMessage();
         }

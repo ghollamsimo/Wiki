@@ -24,12 +24,8 @@
                 <span>Wiki</span> Blog
             </h1>
             <p>everything that you want to know about Evrething</p>
-            <form>
-                <input type = "text" class = "search-input" placeholder="find your food . . .">
-                <button type = "submit" class = "search-btn">
-                    <i class = "fas fa-search"></i>
-                </button>
-            </form>
+                <input type = "text" class = "text-black search-input rounded p-5" name="nom" id="getname" placeholder="find your Special Wiki . . .">
+
         </div>
     </div>
 </header>
@@ -57,7 +53,7 @@
     </div>
 
     <div class = "contain">
-        <div class = "blog-content">
+        <div class = "blog-content" id="showdata">
             <?php
             $wikis = $data['wiki'];
             foreach ($wikis as $wiki) :
@@ -209,7 +205,7 @@
                             $categories = $data['category'];
                             foreach ($categories as $category) :
                                 ?>
-                                <option selected=""><?php echo $category->getNameCategory(); ?></option>
+                                <option value="<?= $category->getId() ?>" selected=""><?php echo $category->getNameCategory(); ?></option>
                             <?php endforeach; ?>
                         </select>
 

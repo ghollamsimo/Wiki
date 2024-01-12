@@ -12,6 +12,7 @@ class Home extends Controller {
     }
 
     public function index(...$param) {
+        $wikis = $this->wikiDAO->ReadLastWiki();
         $wikis = $this->wikiDAO->ReadWiki();
 
         if (isset($_SESSION['iduser'])) {
@@ -19,17 +20,29 @@ class Home extends Controller {
             $user = $this->userDAO->getUserInfo($this->userDAO->getUser());
         }
 
-        if (isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             $wiki = new Wiki();
             $wiki->setTitle($_POST['title']);
-            $wiki->setImage($_POST['img']);
-            $wiki->setTag($_POST['tag']);
+            //$wiki->setTag($_POST['tag']);
             $wiki->setCategory($_POST['cat']);
             $wiki->setDescreption($_POST['desc']);
-            $wiki->getUserId()->setUserId($_POST['userid']);
+            //$wiki->getUserId()->setUserId($_POST['userid']);
+
+
+            if (isset($_FILES['img']) && $_FILES['img']['error'] == UPLOAD_ERR_OK) {
+                $uploadDir = __DIR__ . '/wiki/public/../image';
+                $uploadFile = $uploadDir . basename($_FILES['img']['name']);
+
+                if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadFile)) {
+                    $wiki->setImage($uploadFile);
+                } else {
+                    echo "Error uploading file.";
+                }
+            }
+
             $this->wikiDAO->CreateWiki($wiki);
-            $wiki->setId($_GET['idwiki']);
         }
+
 
         $categorys = $this->category->ReadCategory();
         $this->view('home', ['wiki' => $wikis ,'category' => $categorys]);
@@ -41,8 +54,11 @@ class Home extends Controller {
             $wiki = new Wiki();
             $wiki->setId($idWiki);
             $wikis = $this->wikiDAO->ReadOneWiki($wiki);
+            $wiki->setId($wikis['idwiki']);
+
             $wiki->setTitle($wikis["Title"]);
             $wiki->setDescreption($wikis['Descreption']);
+            $wiki->setImage($wikis['image']);
             $this->view('singlewiki' ,['wiki' => $wiki] );
         }
 

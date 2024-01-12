@@ -16,7 +16,6 @@ class Dashboard extends Controller
 
     public function index()
     {
-        // Analyze user data
         $userAnalysis = $this->AdminDAO->analyseuser();
 
         $wikiCount = $this->AdminDAO->getWikiCount();
@@ -36,9 +35,7 @@ class Dashboard extends Controller
 
     public function Wikis()
     {
-        // Check if the request method is POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Check for 'archive' button
             if (isset($_POST['archive'])) {
                 $archive = $_POST['archive'];
 
@@ -46,7 +43,6 @@ class Dashboard extends Controller
                 $wiki->setId($archive);
                 $this->WikiDAO->Archiver($wiki);
             }
-            // Check for 'unarchive' button
             elseif (isset($_POST['unarchive'])) {
                 $unarchive = $_POST['unarchive'];
                 $wiki = new Wiki();
@@ -55,37 +51,55 @@ class Dashboard extends Controller
             }
         }
 
-        // Fetch the wikis after handling form submissions
         $wiki = $this->WikiDAO->ReadWiki();
 
-        // Pass the wikis to the view
         $this->view('Wiki', ['wiki' => $wiki]);
     }
 
     public function Category(){
 
-        $categorys =  $this->CategoryDAO->ReadCategory();
+        $categorys = $this->CategoryDAO->ReadCategory();
         $cat = new Category();
-        if (isset($_POST['submit'])){
-            $cat->setId($_POST['idcat']);
-            $cat->setCategory($_POST['namecategory']);
+
+        if (isset($_POST['submit'])) {
+            $idcat = isset($_POST['idcat']) ? htmlspecialchars($_POST['idcat']) : '';
+            $namecategory = isset($_POST['namecategory']) ? htmlspecialchars($_POST['namecategory']) : '';
+
+            $cat->setId($idcat);
+            $cat->setCategory($namecategory);
+
             $this->CategoryDAO->CreateCategory($cat);
+
+            header('location: /wiki/public/dashboard/Category');
+            exit();
         }
 
-        if (isset($_POST['delete'])){
-            $idcategory = $_POST['idcat'];
+
+        if (isset($_POST['delete'])) {
+            $idcategory = isset($_POST['idcat']) ? htmlspecialchars($_POST['idcat']) : '';
+
             $cat->setId($idcategory);
+
             $this->CategoryDAO->DeleteCategory($cat);
+
+            header('location: /wiki/public/dashboard/Category');
+            exit();
         }
 
-        if(isset($_POST['edit'])){
-            $categoryId = $_POST['editCategoryId'];
-            $newName = $_POST['editname'];
+
+        if (isset($_POST['edit'])) {
+            $categoryId = isset($_POST['editCategoryId']) ? htmlspecialchars($_POST['editCategoryId']) : '';
+            $newName = isset($_POST['editname']) ? htmlspecialchars($_POST['editname']) : '';
 
             $cat->setId($categoryId);
             $cat->setCategory($newName);
+
             $this->CategoryDAO->EditCategory($cat);
+
+            header('location: /wiki/public/dashboard/Category');
+            exit();
         }
+
 
         $this->view('Categorys' ,['category' => $categorys] );
     }
@@ -93,28 +107,41 @@ class Dashboard extends Controller
     public function Tags(){
         $tags = $this->TagDAO->ReadTag();
         $tag = new Tag();
-        if (isset($_POST['submit'])){
-            $nametag = $_POST['nametag'];
+        if (isset($_POST['submit'])) {
+            $nametag = isset($_POST['nametag']) ? htmlspecialchars($_POST['nametag']) : '';
+
 
             $tag->setNameTag($nametag);
+
             $this->TagDAO->CreateTag($tag);
+
+            header('location: /wiki/public/dashboard/tags');
+
         }
 
-        if (isset($_POST['delete'])){
-            $idtag = $_POST['idtag'];
+        if (isset($_POST['delete'])) {
+            $idtag = isset($_POST['idtag']) ? htmlspecialchars($_POST['idtag']) : '';
 
             $tag->setIdTag($idtag);
             $this->TagDAO->DeleteTag($tag);
+
+            header('location: /wiki/public/dashboard/tags');
+
         }
 
-        if(isset($_POST['edit'])){
-            $idtag = $_POST['idtag'];
-            $nametag = $_POST['editname'];
+
+        if (isset($_POST['edit'])) {
+            $idtag = isset($_POST['idtag']) ? htmlspecialchars($_POST['idtag']) : '';
+            $nametag = isset($_POST['editname']) ? htmlspecialchars($_POST['editname']) : '';
 
             $tag->setIdTag($idtag);
             $tag->setNameTag($nametag);
             $this->TagDAO->EditTag($tag);
+
+            header('location: /wiki/public/dashboard/tags');
+
         }
+
         $this->view('tag' , ['tag' => $tags]);
     }
 }

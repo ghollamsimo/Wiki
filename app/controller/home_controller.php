@@ -42,6 +42,7 @@ class Home extends Controller {
             $wiki->setId($idWiki);
             $wikis = $this->wikiDAO->ReadOneWiki($wiki);
             $wiki->setTitle($wikis["Title"]);
+            $wiki->setDescreption($wikis['Descreption']);
             $this->view('singlewiki' ,['wiki' => $wiki] );
         }
 

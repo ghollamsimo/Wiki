@@ -23,12 +23,11 @@ img{
 }
 .contain{
     max-width: 1320px;
-    margin: 0 auto;
-    padding: 0 1.2rem;
-}
+    margin: 0 auto;}
 
 /* header */
 header{
+
     min-height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/wiki/public/../image/banner-bg.jpg) center/cover no-repeat fixed;
     display: flex;
@@ -36,10 +35,13 @@ header{
     justify-content: space-between;
 }
 .navbar{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    position: static;
     background: rgb(255, 255, 255);
-    padding: 1.2rem;
+    padding: 0.6rem;
     color: black;
 }
+
 .navbar-brand{
     color: black;
     font-size: 2rem;

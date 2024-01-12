@@ -148,7 +148,6 @@
                             </td>
                             <td class="py-4 px-6 border-b border-gray-200 flex justify-end">
                                 <button data-modal-target="edit-modal-<?= $category->getId() ?>" type="submit" data-modal-toggle="edit-modal-<?= $category->getId() ?>" class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Edit</button>
-                                <input type="text" name="idcat" value="<?= $category->getId() ?>">
                                 <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="updateHidden  bg-red-500 text-white py-1 px-2 rounded-full text-xs">Delete</button>
                             </td>
                         </tr>

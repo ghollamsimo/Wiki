@@ -69,7 +69,7 @@
                 <div class = "blog-text">
                     <span><?php echo $wiki->getDate() ?></span>
                     <h2><?php echo $wiki->getTitle()?></h2>
-                    <p><?php echo $wiki->getDescreption()?>
+                    <p class=""><?php echo substr( $wiki->getDescreption() , 0 , 120)?>
                         <a  href = "/wiki/public/home/Singlewiki/<?= $wiki->getId() ?>">Read More</a>
                     </p>
 
@@ -90,65 +90,17 @@
 
         <div class="design-content">
             <!-- item -->
+            <?php foreach ($wikis as $wiki): ?>
             <div class="design-item">
                 <div class="design-img">
                     <img src="/wiki/public/../image/art-design-5.jpg" alt="">
                 </div>
                 <div class="design-title">
-                    <a href="#">make an awesome art portfolio for college or university</a>
+                    <p class="w-full" href="#"><?= $wiki->getTitle() ?></p>
                 </div>
             </div>
             <!-- end of item -->
-            <!-- item -->
-            <div class="design-item">
-                <div class="design-img">
-                    <img src="images/art-design-2.jpg" alt="">
-                </div>
-                <div class="design-title">
-                    <a href="#">make an awesome art portfolio for college or university</a>
-                </div>
-            </div>
-            <!-- end of item -->
-            <!-- item -->
-            <div class="design-item">
-                <div class="design-img">
-                    <img src="images/art-design-3.jpg" alt="">
-                </div>
-                <div class="design-title">
-                    <a href="#">make an awesome art portfolio for college or university</a>
-                </div>
-            </div>
-            <!-- end of item -->
-            <!-- item -->
-            <div class="design-item">
-                <div class="design-img">
-                    <img src="images/art-design-4.jpg" alt="">
-                </div>
-                <div class="design-title">
-                    <a href="#">make an awesome art portfolio for college or university</a>
-                </div>
-            </div>
-            <!-- end of item -->
-            <!-- item -->
-            <div class="design-item">
-                <div class="design-img">
-                    <img src="images/art-design-5.jpg" alt="">
-                </div>
-                <div class="design-title">
-                    <a href="#">make an awesome art portfolio for college or university</a>
-                </div>
-            </div>
-            <!-- end of item -->
-            <!-- item -->
-            <div class="design-item">
-                <div class="design-img">
-                    <img src="images/art-design-6.jpg" alt="">
-                </div>
-                <div class="design-title">
-                    <a href="#">make an awesome art portfolio for college or university</a>
-                </div>
-            </div>
-            <!-- end of item -->
+<?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -223,13 +175,30 @@
                     <div class="col-span-2 sm:col-span-1">
                         <div class="col-span-2 sm:col-span-1">
                             <label for="category" class="block mb-2 text-sm font-medium text-gray-900 ">Tag</label>
-                            <select name="tag" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
-                                <option selected="">Select Tag</option>
-                                <option value="TV">TV/Monitors</option>
-                                <option value="PC">PC</option>
-                                <option value="GA">Gaming/Console</option>
-                                <option value="PH">Phones</option>
-                            </select>
+
+                            <button id="dropdownHelperButton" data-dropdown-toggle="dropdownHelper" class="  w-full border-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">Tag<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown menu -->
+                            <div id="dropdownHelper" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60">
+                                <ul class="p-3 space-y-1 text-sm" aria-labelledby="dropdownHelperButton">
+                                    <li>
+                                        <div class="flex p-2 rounded ">
+                                            <div class="flex items-center h-5">
+                                                <input id="helper-checkbox-1" aria-describedby="helper-checkbox-text-1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2">
+                                            </div>
+                                            <div class="ms-2 text-sm">
+                                                <label for="helper-checkbox-1" class="font-medium ">
+                                                    <div>Enable notifications</div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
@@ -240,7 +209,7 @@
                             $categories = $data['category'];
                             foreach ($categories as $category) :
                                 ?>
-                                <option selected=""><?php echo $category->getCategory(); ?></option>
+                                <option selected=""><?php echo $category->getNameCategory(); ?></option>
                             <?php endforeach; ?>
                         </select>
 

@@ -74,7 +74,6 @@ class Dashboard extends Controller
 
         if (isset($_POST['delete'])){
             $idcategory = $_POST['idcat'];
-
             $cat->setId($idcategory);
             $this->CategoryDAO->DeleteCategory($cat);
         }

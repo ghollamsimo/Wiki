@@ -1,7 +1,9 @@
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+<link rel="stylesheet" href="/wiki/public/style/index.css">
 
-<nav class = "navbar">
+
+<nav class = "navbar w-full">
     <div class = "contain">
         <a href = "/wiki/public/home" class = "navbar-brand">Wiki</a>
         <div class = "navbar-nav">
@@ -41,3 +43,4 @@
         </div>
     </div>
 </nav>
+

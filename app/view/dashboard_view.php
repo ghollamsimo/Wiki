@@ -239,7 +239,7 @@
                             <tr>
                                 <td class="py-4 px-6 border-b border-gray-200"><?php echo $wiki->getDate(); ?></td>
                                 <td class="py-4 px-6 border-b border-gray-200 truncate"><?php echo $wiki->getTitle() ?></td>
-                                <td class="py-4 px-6 border-b border-gray-200"><?php echo substr( $wiki->getDescreption() , 0 , 30) ?></td>
+                                <td class="truncate py-4 px-6 border-b border-gray-200 "><?php echo $wiki->getDescreption() ?></td>
                                 <td class="py-4 px-6 border-b border-gray-200"><?php echo $wiki->getEtat() ?></td>
                             </tr>
                         <?php endforeach;?>

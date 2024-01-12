@@ -27,7 +27,6 @@ class WikiDAO
 
             $query = $this->conn->prepare("INSERT INTO wiki (title, Descreption, etat, image, iduser) 
      VALUES (:title, :desc, :etat, :img, :iduser)");
-
             $query->bindParam(':title', $title);
             $query->bindParam(':desc', $descreption);
             $query->bindParam(':etat', $etat);
@@ -39,17 +38,13 @@ class WikiDAO
             echo 'Alllla Matheme9nich' . $e->getMessage();
         }
     }
-
-
     public function ReadWiki()
     {
         try {
             $query = $this->conn->prepare('SELECT * FROM wiki');
             $query->execute();
             $stmt = $query->fetchAll(PDO::FETCH_ASSOC);
-
             $wikis = [];
-
             foreach ($stmt as $data) {
                 $wiki = new Wiki();
                 $wiki->setId($data['idwiki']);

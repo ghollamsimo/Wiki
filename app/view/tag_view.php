@@ -150,7 +150,7 @@
                             <tr>
                                 <td class="py-4 px-6 border-b border-gray-200"><?php echo $tag->getNameTag(); ?></td>
                                 <td class="py-4 px-6 border-b border-gray-200 flex justify-end">
-                                    <button type="submit" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="pointer bg-green-500 text-white py-1 px-2 rounded-full text-xs" value="">Edit</button>
+                                    <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="pointer bg-green-500 text-white py-1 px-2 rounded-full text-xs" value="">Edit</button>
                                     <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="pointer bg-red-500 text-white py-1 px-2 rounded-full text-xs " value="">Delete</button>
                                 </td>
                             </tr>

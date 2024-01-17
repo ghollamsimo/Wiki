@@ -4,64 +4,119 @@ session_start();
 class Home extends Controller {
     private $wikiDAO;
     private $userDAO;
+    private $wikitag;
+    private $TagDAO;
 
     public function __construct() {
         $this->wikiDAO = new WikiDAO();
         $this->userDAO = new UserDAO();
         $this->category = new CategoryDAO();
+        $this->wikitag = new WikiTagDAO();
+        $this->TagDAO = new TagDAO();
     }
 
     public function index(...$param) {
+        $tags = $this->TagDAO->ReadTag();
         $wikis = $this->wikiDAO->ReadLastWiki();
-        $wikis = $this->wikiDAO->ReadWiki();
+        $wiki = new Wiki();
 
         if (isset($_SESSION['iduser'])) {
             $this->userDAO->getUser()->setId($_SESSION['iduser']);
             $user = $this->userDAO->getUserInfo($this->userDAO->getUser());
         }
-
         if (isset($_POST['submit'])) {
-            $wiki = new Wiki();
-            $wiki->setTitle($_POST['title']);
-            //$wiki->setTag($_POST['tag']);
-            $wiki->setCategory($_POST['cat']);
-            $wiki->setDescreption($_POST['desc']);
-            //$wiki->getUserId()->setUserId($_POST['userid']);
+            try {
+                $wiki->setUserId($_POST['iduser']);
+                $wiki->setTitle($_POST['title']);
+                $wiki->setCategory($_POST['cat']);
+                $wiki->setDescreption($_POST['desc']);
+                $wiki->setEtat($_POST['etat']);
+                $tmp_name = $_FILES['img']['tmp_name'];
+                $imageName = file_get_contents($tmp_name);
+                $wiki->setImage($imageName);
 
+                $insertedWikiId = $this->wikiDAO->CreateWiki($wiki);
+                foreach ($_POST['tag'] as $tagId) {
+                    $wikitag = new WikiTag();
+                    $wikitag->setIdTag($tagId);
+                    $wikitag->setIdWiki($insertedWikiId);
 
-            if (isset($_FILES['img']) && $_FILES['img']['error'] == UPLOAD_ERR_OK) {
-                $uploadDir = __DIR__ . '/wiki/public/../image';
-                $uploadFile = $uploadDir . basename($_FILES['img']['name']);
-
-                if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadFile)) {
-                    $wiki->setImage($uploadFile);
-                } else {
-                    echo "Error uploading file.";
+                    $insertedWikiTagId = $this->wikitag->CreateWikiTag($wikitag);
+                    echo 'Inserted WikiTag ID: ' . $insertedWikiTagId;
                 }
-            }
+                $_SESSION['success_message'] = 'Wiki created successfully.';
+                header('Location: /wiki/public/home/index');
+                exit();
 
-            $this->wikiDAO->CreateWiki($wiki);
+            } catch (Exception $e) {
+                $_SESSION['error_message'] = 'Error creating wiki: ' . $e->getMessage();
+            }
         }
 
-
-        $categorys = $this->category->ReadCategory();
-        $this->view('home', ['wiki' => $wikis ,'category' => $categorys]);
+        $categorys = $this->category->ReadLastCategory();
+        $categories = $this->category->ReadCategory();
+        $this->view('home', ['wiki' => $wikis, 'category' => $categorys, 'categories' => $categories, 'tag' => $tags ]);
     }
 
-    public function Singlewiki($id): void{
+    public function Singlewiki( $id = null ){
+
+        $tags = $this->TagDAO->ReadTag();
+        $categories = $this->category->ReadCategory();
+        $wikitag = $this->wikitag->ReadTag();
+        $wiki = new Wiki();
+
         if ($id){
             $idWiki = $id;
-            $wiki = new Wiki();
             $wiki->setId($idWiki);
             $wikis = $this->wikiDAO->ReadOneWiki($wiki);
             $wiki->setId($wikis['idwiki']);
 
+
             $wiki->setTitle($wikis["Title"]);
+            $wiki->setEtat($wikis['etat']);
             $wiki->setDescreption($wikis['Descreption']);
             $wiki->setImage($wikis['image']);
-            $this->view('singlewiki' ,['wiki' => $wiki] );
+            $wiki->setNameCtaegory($wikis['namecategory']);
         }
 
+        if (isset($_POST['delete'])) {
+            $idwiki = isset($_POST['idwiki']) ? htmlspecialchars($_POST['idwiki']) : '';
+            $wiki->setId($idwiki);
+            $this->wikiDAO->DeleteWiki($wiki);
+            header('location: /wiki/public/home/index');
+            exit();
+        }
+
+        if (isset($_POST['edit'])){
+
+            $wiki->setId($_POST['id']);
+            $wiki->setTitle($_POST['title']);
+            $wiki->setCategory($_POST['cat']);
+            $wiki->setDescreption($_POST['desc']);
+            $tmp_name = $_FILES['img']['tmp_name'];
+            $imageName = file_get_contents($tmp_name);
+            $wiki->setImage($imageName);
+
+            $insertedWikiId = $this->wikiDAO->EditeWiki($wiki);
+            $insertedWikiTagId = $this->wikitag->EditWikiTag($_POST['id']);
+            foreach ((array)$_POST['tag'] as $tagId) {
+
+                if (!empty($tagId)) {
+                    //$wikitag = new WikiTag();
+
+                    //$wikitag->setIdTag($tagId);
+                    //$wikitag->setIdWiki($insertedWikiId);
+
+                    $insertedWikiTagId = $this->wikitag->InsertWikiTag($tagId,$_POST['id']);
+                    echo 'Inserted WikiTag ID: ' . $insertedWikiTagId;
+                }
+            }
+            $_SESSION['success_message'] = 'Wiki created successfully.';
+            header('location: /wiki/public/home/index');
+            exit();
+        }
+
+        $this->view('singlewiki', ['wiki' => $wiki, 'categories' => $categories ,'tag' => $tags , 'wikitag' => $wikitag]);
     }
     public function login() {
         if (isset($_POST['login'])) {
@@ -92,7 +147,14 @@ class Home extends Controller {
 
         $this->view('login');
     }
+    public function search()
+    {
+        extract($_POST);
+        $wikis = $this->wikiDAO->SearchWikiByTitleAndCategory($searchKey, $searchKey);
+        echo json_encode($wikis);
 
+
+    }
     public function logout()
     {
         session_start();
@@ -131,7 +193,6 @@ class Home extends Controller {
                 $user->getUser()->setEmail(trim(isset($_POST['email']) ? trim($_POST['email']) : ''));
                 $user->getUser()->setPassword(isset($_POST['password']) ? trim($_POST['password']) : '');
                 $user->getUser()->setRole(isset($_POST['role']) ? trim($_POST['role']) : '');
-
                 if ($user->CreateUser($user->getUser()) === true) {
                     $rowUser = $user->selectLastUser();
                     $_SESSION['iduser'] = $rowUser['iduser'];
@@ -168,4 +229,25 @@ class Home extends Controller {
         ];
         $this->view('Rigester', $error_user);
     }
+public function multipleWikis($id){
+        if ($id){
+            $idcategory = $id;
+            $category = new Category();
+            $category->setId($idcategory);
+            $categories = $this->category->ReadOneCategory($category);
+            $category->setId($categories['idcategory']);
+            $this->view('singlecategory');
+        }
+
+}
+public function wikis(){
+    $wikis = $this->wikiDAO->ReadWiki();
+
+    $this->view('wikipage' , ['wiki' => $wikis]);
+}
+public function categories(){
+    $categorys = $this->category->ReadCategory();
+
+    $this->view('categoryPage' , ['category' => $categorys]);
+}
 }

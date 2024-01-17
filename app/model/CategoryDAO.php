@@ -14,7 +14,7 @@ class CategoryDAO
     public function ReadCategory()
     {
         try {
-            $query = $this->conn->prepare('SELECT * FROM category ');
+            $query = $this->conn->prepare('SELECT * FROM category');
             $query->execute();
 
             $categories = [];
@@ -34,6 +34,37 @@ class CategoryDAO
         }
     }
 
+    public function ReadLastCategory()
+    {
+        try {
+            $query = $this->conn->prepare('SELECT * FROM category LIMIT 3');
+            $query->execute();
+
+            $categories = [];
+
+            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+                $categoryInstance = new Category();
+                $categoryInstance->setId($data["idcategory"]);
+                $categoryInstance->setCategory($data['namecategory']);
+
+                $categories[] = $categoryInstance;
+            }
+
+            return $categories;
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+            return [];
+        }
+    }
+
+    public function ReadOneCategory(Category $category){
+        $id = $category->getId();
+        $qury = $this->conn->prepare('SELECT category.* , wiki.* FROM category JOIN wiki ON wiki.idcategory = category.idcategory WHERE category.idcategory = :idcategory');
+        $qury->bindParam(':idcategory', $id);
+        $qury->execute();
+           return $qury->fetchAll();
+    }
+
     public function CreateCategory(Category $category){
         $name = $category->getNameCategory();
         $id = $category->getId();
@@ -49,9 +80,9 @@ class CategoryDAO
             $name = $category->getNameCategory();
             $id = $category->getId();
 
-            $query = $this->conn->prepare('UPDATE category SET namecategory = :catname WHERE idcategory = :idcategory');
+            $query = $this->conn->prepare('UPDATE category SET namecategory = :catname WHERE idcategory = :idcategory ');
             $query->bindParam(':catname', $name);
-            $query->bindParam(':idcategory', $id, PDO::PARAM_INT); // Use PDO::PARAM_INT for integer types
+            $query->bindParam(':idcategory', $id, PDO::PARAM_INT);
             $query->execute();
 
             $rowCount = $query->rowCount();

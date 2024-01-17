@@ -1,7 +1,7 @@
 <?php
 
 class DataBaseConnection{
-    private $host = 'localhost';
+    private $host = 'localhost:3308';
     private $username = 'root';
     private $password = '';
     private $database = 'wiki';
@@ -19,5 +19,11 @@ class DataBaseConnection{
     public function prepare($sql)
     {
         return $this->conn->prepare($sql);
+    }
+
+    public function lastInsertId()
+    {
+        return $this->conn->lastInsertId();
+
     }
 }

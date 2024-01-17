@@ -48,6 +48,7 @@ class Dashboard extends Controller
                 $wiki = new Wiki();
                 $wiki->setId($unarchive);
                 $this->WikiDAO->NonArchiver($wiki);
+
             }
         }
 

@@ -1,17 +1,20 @@
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 <link rel="stylesheet" href="/wiki/public/style/index.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
 
 <nav class = "navbar w-full">
     <div class = "contain">
         <a href = "/wiki/public/home" class = "navbar-brand">Wiki</a>
         <div class = "navbar-nav">
-            <a href = "">home</a>
-            <a href = "">Wiki</a>
-            <a href = "">Category</a>
-            <a href = "">about</a>
+            <a href = "/wiki/public/home">home</a>
+            <a href = "/wiki/public/home/wikis">Wiki</a>
+            <a href = "/wiki/public/home/categories">Category</a>
         </div>
+        <form id="search-form" method="post">
+            <input type = "text" class = "text-black border-2 search-input rounded p-5" name="nom" id="getname" placeholder="find your Special Wiki . . .">
+        </form>
         <div>
             <?php if (isset($_SESSION['iduser'])):
                 if ($_SESSION['role'] === 'Auteur'):
@@ -40,7 +43,12 @@
             <button class="original-button">Login</button>
             </form>
             <?php endif; ?>
+
+
         </div>
     </div>
 </nav>
+
+<script src="/wiki/public/../js/search.js"></script>
+
 

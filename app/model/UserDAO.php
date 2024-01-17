@@ -56,9 +56,6 @@ class UserDAO{
                 $user = new User();
                 $user->setEmail($row['Email']);
 
-                // Check if the image is null
-                $user->setImage($row['image'] ?? '6596afe3182a6_profile_pic.png');
-
                 $user->setName($row['Nom']);
                 $user->setId($row['iduser']);
 

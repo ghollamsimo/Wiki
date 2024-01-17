@@ -31,28 +31,25 @@ require_once (__DIR__ . '/../../include/head.php');
                     <form id="formAuthentication" class="mb-3" method="post" action="">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username"
-                                   placeholder="Enter your username" autofocus />
+                            <input type="text" class="form-control" id="signupForm" name="username"
+                                   placeholder="Enter your username" autofocus required/>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" name="email"
-                                   placeholder="Enter your email" />
+                            <input type="text" class="form-control" id="signupForm" name="email"
+                                   placeholder="Enter your email" required/>
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <label class="form-label" for="password">Password</label>
                             <div class="input-group input-group-merge">
-                                <input type="password" id="password" class="form-control" name="password"
+                                <input type="password" id="signupForm" class="form-control" name="password"
                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                       aria-describedby="password" />
+                                       aria-describedby="password"required />
                                 <!-- <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span> -->
                             </div>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <input type="file" class="form-control" name="image" id="inputGroupFile01">
-                        </div>
-
+                        <label>Role</label>
                         <select class="form-select mb-3" name="role" aria-label="Default select example">
                             <option>Autuers</option>
                         </select>

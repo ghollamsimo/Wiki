@@ -8,10 +8,11 @@ class Wiki
     private $image;
     private $date;
     private $etat;
-    private $tag;
+    private $idtag;
     private $category;
     private $userid;
-
+    private $namecategory;
+    private $tag;
     public function __construct(){
 
     }
@@ -54,12 +55,12 @@ class Wiki
     public function setEtat($value){
         return $this->etat = $value;
     }
-    public function getTag(){
-        return $this->tag;
+    public function getIdTag(){
+        return $this->idtag;
     }
 
-    public function setTag($value){
-        return $this->tag = $value;
+    public function setIdTag($value){
+        return $this->idtag = $value;
     }
     public function getCategory(){
         return $this->category;
@@ -73,5 +74,19 @@ class Wiki
     }
     public function setUserId($value){
         return $this->userid = $value;
+    }
+    public function getNameCtaegory()
+    {
+        return $this->namecategory;
+    }
+    public function setNameCtaegory($value){
+        return $this->namecategory = $value;
+    }
+
+    public function getTag(){
+        return $this->tag;
+    }
+    public function setTag($value){
+        return $this->tag = $value;
     }
 }

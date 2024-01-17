@@ -13,14 +13,107 @@
     font-weight: 600;
     font-family: var(--Quicksand);
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    margin-block: 2rem;
+    gap: 2rem;
+}
+
+img {
+    max-width: 100%;
+    width: 100%;
+    height: 10rem;
+    display: block;
+    object-fit: cover;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: clamp(19rem, calc(19rem + 2vw), 22rem);
+    height: fit-content;
+    overflow: hidden;
+    box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+    border-radius: 1em;
+    background: #ECE9E6;
+    background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+}
+
+.card__body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.tag {
+    align-self: flex-start;
+    padding: .25em .75em;
+    border-radius: 1em;
+    font-size: .75rem;
+}
+
+.tag + .tag {
+    margin-left: .5em;
+}
+
+.tag-blue {
+    background: #56CCF2;
+    background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+    color: #fafafa;
+}
+
+.tag-brown {
+    background: #D1913C;
+    background: linear-gradient(to bottom, #FFD194, #D1913C);
+    color: #fafafa;
+}
+
+.tag-red {
+    background: #cb2d3e;
+    background: linear-gradient(to bottom, #ef473a, #cb2d3e);
+    color: #fafafa;
+}
+
+.card__body h4 {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}
+a{
+    font-weight: 800;
+}
+.card__footer {
+    display: flex;
+    padding: 1rem;
+    margin-top: auto;
+}
+
+.user {
+    display: flex;
+    gap: .5rem;
+}
+
+.user__image {
+    border-radius: 50%;
+}
+
+.user__info > small {
+    color: #666;
+}
+
 body{
     line-height: 1.4;
     color: var(--dark);
 }
-img{
-    width: 100%;
-    display: block;
-}
+
 .contain{
     max-width: 1320px;
     margin: 0 auto;}
@@ -28,7 +121,7 @@ img{
 /* header */
 header{
 
-    min-height: 100vh;
+    min-height: 40vh;
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/wiki/public/../image/banner-bg.jpg) center/cover no-repeat fixed;
     display: flex;
     flex-direction: column;
@@ -131,9 +224,10 @@ header{
     font-family: var(--Roboto);
     font-size: 1.1rem;
     width: 100%;
+    padding: 0rem;
+    height: fit-content;
     outline: 0;
-    padding: 0.6rem 0;
-    border: none;
+    border: 1px solid black;
 }
 .search-input::placeholder{
     text-transform: capitalize;
@@ -157,8 +251,6 @@ header{
     justify-content: space-between;
 }
 .title{
-    text-align: left;
-
     padding: 1rem 0;
 }
 .title h2{
@@ -372,6 +464,9 @@ footer{
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
     }
+    .category{
+        grid-template-columns: 1fr;
+    }
 }
 
 @media screen and (min-width: 992px){
@@ -384,10 +479,17 @@ footer{
         column-gap: 3rem;
         align-items: center;
     }
+
 }
 
 @media screen and (min-width: 1200px){
     .design-content{
         grid-template-columns: repeat(3, 1fr);
     }
+
+}
+.category{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
 }

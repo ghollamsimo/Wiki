@@ -8,3 +8,4 @@ require_once 'model/WikiDAO.php';
 require_once 'model/AdminDAO.php';
 require_once 'model/CategoryDAO.php';
 require_once 'model/TagDAO.php';
+require_once 'model/WikiTagDAO.php';

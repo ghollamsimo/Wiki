@@ -24,11 +24,11 @@ require_once (__DIR__ . '/../../include/head.php');
                     <h4 class="mb-2">Welcome to Wiki!</h4>
                     <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-                    <form id="formAuthentication" class="mb-3" method="post" action="">
+                    <form id="formAuthentication loginForm" class="mb-3" method="post" action="">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email or Username</label>
-                            <input type="text" class="form-control" id="email" name="email"
-                                   placeholder="Enter your email or username" autofocus />
+                            <input type="text" class="form-control" id="signupForm" name="email"
+                                   placeholder="Enter your email or username" autofocus required />
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
@@ -36,9 +36,9 @@ require_once (__DIR__ . '/../../include/head.php');
 
                             </div>
                             <div class="input-group input-group-merge">
-                                <input type="password" id="password" class="form-control" name="password"
+                                <input type="password" id="signupForm" class="form-control" name="password"
                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                       aria-describedby="password" />
+                                       aria-describedby="password" required />
                                 <!-- <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span> -->
                             </div>
                         </div>
@@ -64,5 +64,6 @@ require_once (__DIR__ . '/../../include/head.php');
         </div>
     </div>
 </div>
+<script src="/wiki/public/../js/script.js"></script>
 </body>
 </html>
